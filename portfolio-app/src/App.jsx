@@ -7,7 +7,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import './App.css';
 import './animations.css';
-
+import Skills from './pages/skills';
 function App() {
   return (
     <Router>
@@ -21,8 +21,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+            <Skills/>
         </main>
-        
+      
         <Footer />
       </div>
     </Router>

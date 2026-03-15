@@ -1,42 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowDown, Github, Linkedin, Twitter, Sparkles } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Download, Github, MessageCircle, Linkedin, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import profileImage from '../assets/images/images.png';
 import './HeroSection.css';
 
-const roles = [
-  'Full Stack Developer',
-  'Web Application Architect',
-  'JavaScript Specialist',
-  'Open Source Contributor',
-];
-
 export function HeroSection() {
-  const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const role = roles[currentRole];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (displayText.length < role.length) {
-            setDisplayText(role.slice(0, displayText.length + 1));
-          } else {
-            setTimeout(() => setIsDeleting(true), 2000);
-          }
-        } else {
-          if (displayText.length > 0) {
-            setDisplayText(displayText.slice(0, -1));
-          } else {
-            setIsDeleting(false);
-            setCurrentRole((prev) => (prev + 1) % roles.length);
-          }
-        }
-      },
-      isDeleting ? 40 : 80
-    );
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole]);
 
   return (
     <section className="hero-section">
@@ -46,67 +14,70 @@ export function HeroSection() {
         <div className="hero-gradient hero-gradient-accent"></div>
       </div>
 
-      <div className="hero-container">
-        {/* Profile Image */}
-        {/* Status Badge */}
-        <div className="hero-badge">
-          <span className="hero-badge-dot">
-            <span className="hero-badge-dot-ping"></span>
-            <span className="hero-badge-dot-solid"></span>
-          </span>
-          <span className="hero-badge-text">Available for opportunities</span>
-        </div>
+      <div className="hero-wrapper">
+        {/* Left Content */}
+        <div className="hero-content">
+          {/* Subtitle */}
+          <p className="hero-subtitle">Welcome to my portfolio!</p>
 
-        {/* Main Heading */}
-        <h1 className="hero-title">
-          <span className="hero-title-intro">Hi, I'm</span>
-          <span className="hero-title-name">Rahul Pawar</span>
-        </h1>
+          {/* Main Heading */}
+          <h1 className="hero-title">
+            <span className="hero-title-intro">Hello, my name's</span>
+            <span className="hero-title-name">Rahul Pawar</span>
+          </h1>
 
-        {/* Typing Animation */}
-        <div className="hero-typing">
-          <Sparkles size={16} className="hero-typing-spark" />
-          <p className="hero-typing-text">
-            {displayText}
-            <span className="hero-typing-cursor"></span>
+          {/* Description */}
+          <p className="hero-description">
+            I'm a Full Stack Software Developer from India. Currently building scalable web applications 
+            with modern technologies like React, Node.js, and TypeScript. Passionate about creating efficient solutions 
+            and excellent user experiences.
           </p>
-          <Sparkles size={16} className="hero-typing-spark" />
+
+          {/* CTA Buttons */}
+          <div className="hero-buttons">
+            <a href="/resume.pdf" className="hero-btn hero-btn-primary" download>
+              <Download size={18} />
+              Download CV
+            </a>
+            <Link to="/projects" className="hero-btn hero-btn-secondary">
+              <span>See my work</span>
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+
         </div>
 
-        {/* Description */}
-        <p className="hero-description">
-          I specialize in designing and developing scalable, high-performance web applications
-          using modern technologies. Dedicated to creating elegant solutions, intuitive user
-          experiences, and maintaining exceptional code quality.
-        </p>
+        {/* Right: Profile Image & Social */}
+        <div className="hero-right">
+          {/* Decorative Top Element */}
+          <div className="hero-decoration hero-decoration-top"></div>
 
-        {/* Social Icons */}
-        <div className="hero-social">
-          {[
-            { href: 'https://github.com/Rahulpawar56', icon: Github, label: 'GitHub' },
-            { href: 'https://linkedin.com', icon: Linkedin, label: 'LinkedIn' },
-            { href: 'https://twitter.com', icon: Twitter, label: 'Twitter' },
-          ].map((social) => {
-            const Icon = social.icon;
-            return (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-social-link"
-                aria-label={social.label}
-              >
-                <Icon size={20} />
-              </a>
-            );
-          })}
-        </div>
+          {/* Profile Image */}
+          <div className="hero-profile-wrapper">
+            <div className="hero-profile-border">
+              <img 
+                src={profileImage}
+                alt="Rahul Pawar" 
+                className="hero-profile-image"
+              />
+            </div>
+          </div>
 
-        {/* Scroll indicator */}
-        <div className="hero-scroll">
-          <span className="hero-scroll-text">Scroll</span>
-          <ArrowDown size={16} className="hero-scroll-arrow" />
+          {/* Social Icons */}
+          <div className="hero-social-vertical">
+            <div className="hero-social-label">
+            <h1>Follow me ...</h1>
+            </div>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social-icon hero-social-linkedin">
+              <Linkedin size={20} />
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero-social-icon hero-social-github">
+              <Github size={20} />
+            </a>
+            <a href="mailto:contact@example.com" className="hero-social-icon hero-social-message">
+              <MessageCircle size={20} />
+            </a>
+          </div>
         </div>
       </div>
     </section>

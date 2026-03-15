@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Code2, Menu, X, Home, FolderKanban, User, Mail, Terminal, Github, Linkedin, Twitter } from 'lucide-react';
 import { cn } from '../utils/cn';
-import profileImage from '../assets/images/photo1.jpeg';
+import profileImage from '../assets/images/images.png';
 import './Header.css';
 
 const navItems = [
@@ -12,11 +12,7 @@ const navItems = [
   { href: '/contact', label: 'Contact', icon: Mail },
 ];
 
-const socialLinks = [
-  { href: 'https://github.com/Rahulpawar56', icon: Github, label: 'GitHub' },
-  { href: 'https://linkedin.com', icon: Linkedin, label: 'LinkedIn' },
-  { href: 'https://twitter.com', icon: Twitter, label: 'Twitter' },
-];
+
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,7 +38,7 @@ export function Header() {
       )}
     >
       <div className="header-content">
-        <div className="header-top">
+               <div className="header-top">
           {/* Left: Logo & Profile */}
           <Link to="/" className="logo-link">
             <img 
@@ -60,37 +56,39 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Center: Desktop Navigation */}
-          <nav className="nav-desktop">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className="nav-link"
-                >
-                  <Icon size={16} />
-                  <span>{item.label}</span>
-                  <span className="nav-underline"></span>
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Right: Desktop Navigation + Mobile Menu */}
+          <div className="header-right">
+            <nav className="nav-desktop">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className="nav-link"
+                  >
+                    <Icon size={16} />
+                    <span>{item.label}</span>
+                    <span className="nav-underline"></span>
+                  </Link>
+                );
+              })}
+            </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="mobile-menu-btn"
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X size={20} />
-            ) : (
-              <Menu size={20} />
-            )}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="mobile-menu-btn"
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X size={20} />
+              ) : (
+                <Menu size={20} />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -117,23 +115,6 @@ export function Header() {
             })}
           </nav>
           {/* Mobile Social Links */}
-          <div className="social-mobile">
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-mobile-link"
-                  aria-label={social.label}
-                >
-                  <Icon size={18} />
-                </a>
-              );
-            })}
-          </div>
         </div>
       </div>
     </header>
