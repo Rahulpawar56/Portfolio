@@ -8,11 +8,10 @@ import './Header.css';
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/projects', label: 'Projects', icon: FolderKanban },
+  { href: '/skills', label: 'Skills', icon: Code2 },
   { href: '/about', label: 'About', icon: User },
   { href: '/contact', label: 'Contact', icon: Mail },
 ];
-
-
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
