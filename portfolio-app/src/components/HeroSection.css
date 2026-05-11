@@ -6,8 +6,7 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  padding: 20px 20px;
-  margin-top: 30px;
+  padding: 120px 20px 60px;
   background: linear-gradient(135deg, rgba(15, 23, 42, 1) 0%, rgba(30, 41, 59, 1) 100%);
   overflow: hidden;
 }

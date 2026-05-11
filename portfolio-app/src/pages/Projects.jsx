@@ -5,69 +5,71 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce application with payment integration',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      image: '🛍️',
+      title: 'Payment Orchestration Engine',
+      description: 'High-throughput payment routing engine handling 1000+ requests per minute across 70+ payment gateways with live rule-based logic.',
+      tech: ['Node.js', 'TypeScript', 'Redis', 'PostgreSQL'],
+      badge: 'Most Complex Build',
+      status: 'completed',
+      features: [
+        '1000+ TPS in production',
+        '70+ gateway integrations',
+        'Rule-based live routing',
+        'Circuit breaker resilience'
+      ]
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'Collaborative task management system with real-time updates',
-      tech: ['React', 'Firebase', 'Tailwind CSS'],
-      image: '✅',
-    },
-    {
-      id: 3,
-      title: 'Weather Dashboard',
-      description: 'Real-time weather application with multiple locations',
-      tech: ['React', 'API Integration', 'Chart.js'],
-      image: '🌤️',
-    },
-    {
-      id: 4,
-      title: 'Social Media Analytics',
-      description: 'Dashboard for tracking social media metrics and insights',
-      tech: ['React', 'D3.js', 'Express', 'PostgreSQL'],
-      image: '📊',
-    },
-    {
-      id: 5,
-      title: 'Blog Platform',
-      description: 'Modern blogging platform with admin dashboard',
-      tech: ['Next.js', 'Sanity CMS', 'Vercel'],
-      image: '📝',
-    },
-    {
-      id: 6,
-      title: 'Chat Application',
-      description: 'Real-time messaging app with user authentication',
-      tech: ['React', 'Socket.io', 'Node.js', 'Redis'],
-      image: '💬',
+      title: 'Cinema Booking Platform — UAE',
+      description: 'Full-featured movie ticketing and seat reservation platform for the UAE region with real-time seat locking and conflict prevention.',
+      tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
+      badge: 'In Progress',
+      status: 'in-progress',
+      features: [
+        'Real-time seat reservation',
+        'Redis TTL seat locking',
+        'Multi-screen venue management',
+        'Regional gateway integration'
+      ]
     }
   ];
 
   return (
-    <div className="projects page-enter">
-      <div className="projects-header">
-        <h2>My Projects</h2>
-        <p>Explore some of my recent work and side projects</p>
-      </div>
+    <div className="projects">
+      <div className="projects-container">
+        <h2 className="projects-title">Projects</h2>
+        
+        <div className="projects-list">
+          {projects.map((project) => (
+            <div key={project.id} className={`project-card ${project.status}`}>
+              <div className="project-header">
+                <div className="project-icon">
+                  {project.status === 'completed' ? '🔗' : '🎬'}
+                </div>
+                <span className={`project-badge ${project.status}`}>
+                  {project.badge}
+                </span>
+              </div>
 
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <div key={project.id} className="project-card" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div className="project-image">{project.image}</div>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="tech-stack">
-              {project.tech.map((tech, i) => (
-                <span key={i} className="tech-badge">{tech}</span>
-              ))}
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+
+              <div className="project-tech">
+                {project.tech.map((tech, i) => (
+                  <span key={i} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+
+              <ul className="project-features">
+                {project.features.map((feature, i) => (
+                  <li key={i}>
+                    <span className="feature-icon">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <a href="#" className="project-link">View Project →</a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -418,3 +418,23 @@
     display: none !important;
   }
 }
+
+/* Active Link Styles */
+.nav-link-active {
+  color: #3B82F6 !important;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.nav-link-active::before {
+  transform: scaleX(1);
+}
+
+.nav-link-active .nav-underline {
+  width: 80%;
+}
+
+.nav-mobile-link-active {
+  color: #3B82F6 !important;
+  background: rgba(59, 130, 246, 0.15);
+  border-left: 3px solid #3B82F6;
+}

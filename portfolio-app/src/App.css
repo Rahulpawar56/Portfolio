@@ -7,10 +7,16 @@
 
 .main-content {
   flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
   width: 100%;
+}
+
+.main-content section {
+  width: 100%;
+  scroll-margin-top: 80px;
+}
+
+.main-content section#home {
+  min-height: 100vh;
 }
 
 .hero {

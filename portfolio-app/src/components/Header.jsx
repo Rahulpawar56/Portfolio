@@ -1,31 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Code2, Menu, X, Home, FolderKanban, User, Mail, Terminal, Github, Linkedin, Twitter } from 'lucide-react';
+import { Code2, Menu, X, Home, FolderKanban, User, Mail, Terminal } from 'lucide-react';
 import { cn } from '../utils/cn';
 import profileImage from '../assets/images/images.png';
 import './Header.css';
 
 const navItems = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/projects', label: 'Projects', icon: FolderKanban },
-  { href: '/skills', label: 'Skills', icon: Code2 },
-  { href: '/about', label: 'About', icon: User },
-  { href: '/contact', label: 'Contact', icon: Mail },
+  { href: '#home', label: 'Home', icon: Home },
+  { href: '#about', label: 'About', icon: User },
+  { href: '#projects', label: 'Projects', icon: FolderKanban },
+  { href: '#contact', label: 'Contact', icon: Mail },
 ];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Update active section based on scroll position
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      const offsetTop = element.offsetTop - 80; // Account for fixed header
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+    closeMobileMenu();
+  };
 
   return (
     <header
@@ -39,7 +65,7 @@ export function Header() {
       <div className="header-content">
                <div className="header-top">
           {/* Left: Logo & Profile */}
-          <Link to="/" className="logo-link">
+          <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="logo-link">
             <img 
               src={profileImage}
               alt="Rahul Pawar" 
@@ -53,23 +79,25 @@ export function Header() {
                 <p>Software Engineer</p>
               </div>
             </div>
-          </Link>
+          </a>
 
           {/* Right: Desktop Navigation + Mobile Menu */}
           <div className="header-right">
             <nav className="nav-desktop">
               {navItems.map((item) => {
                 const Icon = item.icon;
+                const isActive = activeSection === item.href.replace('#', '');
                 return (
-                  <Link
+                  <a
                     key={item.href}
-                    to={item.href}
-                    className="nav-link"
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={cn("nav-link", isActive && "nav-link-active")}
                   >
                     <Icon size={16} />
                     <span>{item.label}</span>
                     <span className="nav-underline"></span>
-                  </Link>
+                  </a>
                 );
               })}
             </nav>
@@ -100,16 +128,17 @@ export function Header() {
           <nav className="nav-mobile-menu">
             {navItems.map((item) => {
               const Icon = item.icon;
+              const isActive = activeSection === item.href.replace('#', '');
               return (
-                <Link
+                <a
                   key={item.href}
-                  to={item.href}
-                  onClick={closeMobileMenu}
-                  className="nav-mobile-link"
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={cn("nav-mobile-link", isActive && "nav-mobile-link-active")}
                 >
                   <Icon size={16} />
                   <span>{item.label}</span>
-                </Link>
+                </a>
               );
             })}
           </nav>

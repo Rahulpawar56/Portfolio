@@ -1,10 +1,20 @@
 import React from 'react';
-import { ArrowRight, Download, Github, MessageCircle, Linkedin, ArrowDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, Download, Github, MessageCircle, Linkedin } from 'lucide-react';
 import profileImage from '../assets/images/images.png';
 import './HeroSection.css';
 
 export function HeroSection() {
+  const handleProjectsClick = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('projects');
+    if (element) {
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section className="hero-section">
@@ -22,15 +32,12 @@ export function HeroSection() {
 
           {/* Main Heading */}
           <h1 className="hero-title">
-            <span className="hero-title-intro">Hello, my name's</span>
             <span className="hero-title-name">Rahul Pawar</span>
           </h1>
 
           {/* Description */}
           <p className="hero-description">
-            I'm a Full Stack Software Developer from India. Currently building scalable web applications 
-            with modern technologies like React, Node.js, and TypeScript. Passionate about creating efficient solutions 
-            and excellent user experiences.
+         Full-stack developer focused on building scalable web applications, secure REST APIs, and responsive user experiences. Skilled in React, Angular, Node.js, TypeScript, MongoDB, and MySQL, with experience developing enterprise admin panels and booking platforms.
           </p>
 
           {/* CTA Buttons */}
@@ -39,10 +46,10 @@ export function HeroSection() {
               <Download size={18} />
               Download CV
             </a>
-            <Link to="/projects" className="hero-btn hero-btn-secondary">
+            <a href="#projects" onClick={handleProjectsClick} className="hero-btn hero-btn-secondary">
               <span>See my work</span>
               <ArrowRight size={18} />
-            </Link>
+            </a>
           </div>
 
         </div>
